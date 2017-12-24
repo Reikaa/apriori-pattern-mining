@@ -17,10 +17,10 @@ package com.github.juliomarcopineda;
 import java.util.Set;
 
 /**
- * @TODO <p>add class description</p>
+ * Wrapper class for a single transaction object for pattern mining.
  * 
- * @author Julio Pineda created on Dec 24, 2017
- * 
+ * @author Julio Pineda created on 2017-12-24
+ *
  */
 public class Transaction {
 	private int id;
