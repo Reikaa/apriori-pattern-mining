@@ -14,6 +14,8 @@
  */
 package com.github.juliomarcopineda;
 
+import java.util.Collection;
+
 /**
  * add class description
  * 
@@ -21,12 +23,29 @@ package com.github.juliomarcopineda;
  * 
  */
 public class AprioriPatternMining {
+	private int minSupport;
+	private Collection<Transaction> transactions;
 	
 	/**
-	 * 
+	 * Empty class constructor
 	 */
 	public AprioriPatternMining() {
-		// TODO Auto-generated constructor stub
 	}
 	
+	public AprioriPatternMining(int minSupport, Collection<Transaction> transactions) {
+		this.minSupport = minSupport;
+		this.transactions = transactions;
+	}
+	
+	/**
+	 * Constructor that accepts minimum support and the file name for the transaction database.
+	 * 
+	 * @param minSupport
+	 * @param transactionDatabaseFile
+	 */
+	public AprioriPatternMining(int minSupport, String transactionDatabaseFile) {
+		this.minSupport = minSupport;
+		
+		//TODO process transaction database file
+	}
 }
