@@ -24,7 +24,7 @@ import java.util.Set;
  */
 public class Transaction {
 	private int id;
-	Set<?> symbols;
+	Set<?> items;
 	
 	public int getId() {
 		return id;
@@ -34,12 +34,12 @@ public class Transaction {
 		this.id = id;
 	}
 	
-	public Set<?> getSymbols() {
-		return symbols;
+	public Set<?> getItems() {
+		return items;
 	}
 	
-	public void setSymbols(Set<?> symbols) {
-		this.symbols = symbols;
+	public void setSymbols(Set<?> items) {
+		this.items = items;
 	}
 	
 	@Override
