@@ -22,15 +22,24 @@ import java.util.Set;
  * @author Julio Pineda created on 2017-12-26
  * 
  */
-public class Itemset {
-	private Set<?> items;
+public class Itemset<E> {
+	private Set<E> items;
 	private int size;
+	private int support;
 	
-	public Set<?> getItems() {
+	public int getSupport() {
+		return support;
+	}
+	
+	public void setSupport(int support) {
+		this.support = support;
+	}
+	
+	public Set<E> getItems() {
 		return items;
 	}
 	
-	public void setItems(Set<?> items) {
+	public void setItems(Set<E> items) {
 		this.items = items;
 	}
 	

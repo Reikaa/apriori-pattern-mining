@@ -1,2 +1,113 @@
-description = 'Gradle build for apriori pattern mining'
-version = '1.0'
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath(group: 'com.sahlbach.gradle', name: 'gradle-jetty-eclipse-plugin', version: '1.9.+')
+		classpath 'com.github.rholder:gradle-one-jar:1.0.3'
+	}
+    
+    dependencies {
+		classpath 'org.akhikhl.gretty:gretty:+'
+	}
+}
+
+plugins {
+	id "com.github.johnrengelman.shadow" version "1.2.3"
+}
+
+
+
+defaultTasks 'build'
+
+
+
+subprojects {
+
+
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'maven'
+	apply plugin: 'com.github.johnrengelman.shadow'
+
+	shadowJar {
+		zip64 true
+	}
+
+	defaultTasks 'build'
+
+	uploadArchives {
+		repositories {
+			mavenDeployer {
+				repository(url: "file:///maven")
+			}
+		}
+	}
+
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	version = '1.0'
+
+	group = 'com.github.juliomarcopineda'
+
+	repositories {
+		mavenCentral()
+		flatDir name: 'directoryRepository', dirs: rootProject.file('notInMaven')
+		maven {
+			url "https://oss.sonatype.org/content/repositories/snapshots"
+		}
+	}
+
+	configurations.all {
+		// check for updates every build
+		resolutionStrategy.cacheChangingModulesFor 600, 'seconds'
+	}
+
+
+
+	[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+	compileJava {
+		options.debug = true
+		options.debugOptions.debugLevel = "source,lines,vars"
+	}
+
+	dependencies {
+		testCompile 'junit:junit:[4.10,)'
+	}
+
+	sourceSets {
+		main {
+			resources {
+				srcDir 'src/main/java'
+			}
+		}
+		test {
+			resources {
+				srcDir 'src/test/java'
+			}
+		}
+	}
+
+	task sourceJar(type: Jar) {
+		classifier = 'sources'
+		from sourceSets.main.allSource
+	}
+
+	jar {
+		dependsOn 'sourceJar'
+	}
+
+	configurations {
+		source
+	}
+
+
+	artifacts {
+		source sourceJar
+	}
+
+}

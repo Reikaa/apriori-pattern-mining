@@ -22,9 +22,9 @@ import java.util.Set;
  * @author Julio Pineda created on 2017-12-24
  *
  */
-public class Transaction {
+public class Transaction<E> {
 	private int id;
-	Set<?> items;
+	Set<E> items;
 	
 	public int getId() {
 		return id;
@@ -34,11 +34,11 @@ public class Transaction {
 		this.id = id;
 	}
 	
-	public Set<?> getItems() {
+	public Set<E> getItems() {
 		return items;
 	}
 	
-	public void setSymbols(Set<?> items) {
+	public void setSymbols(Set<E> items) {
 		this.items = items;
 	}
 	
