@@ -14,7 +14,15 @@
  */
 package com.github.juliomarcopineda;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * add class description
@@ -45,7 +53,48 @@ public class AprioriPatternMining {
 	 */
 	public AprioriPatternMining(int minSupport, String transactionDatabaseFile) {
 		this.minSupport = minSupport;
-		
-		//TODO process transaction database file
+		processTransactionFile(transactionDatabaseFile);
 	}
+	
+	/**
+	 * Reads the transaction database file and stores the transactions in a list. This method automatically assigns
+	 * an arbitrary transaction id per transaction.
+	 * 
+	 * The items/symbols in the transaction are space separated.
+	 */
+	private void processTransactionFile(String transactionDatabaseFile) {
+		List<Transaction> transactions = new ArrayList<>();
+		
+		try {
+			// set up buffered reader to read text file
+			BufferedReader reader = new BufferedReader(new FileReader(new File(transactionDatabaseFile)));
+			
+			String line;
+			int id = 0;
+			while ((line = reader.readLine()) != null) {
+				Transaction transaction = new Transaction();
+				
+				// set id and increment
+				transaction.setId(id);
+				id++;
+				
+				// parse text file and store items into a set
+				Set<String> symbols = new HashSet<>();
+				String[] symbolsArray = line.split(" ");
+				for (int i = 0; i < symbolsArray.length; i++) {
+					symbols.add(symbolsArray[i]);
+				}
+				transaction.setSymbols(symbols);
+				
+				// add transaction to list
+				transactions.add(transaction);
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.transactions = transactions;
+	}
+	
 }
