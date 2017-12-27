@@ -26,6 +26,22 @@ public class Transaction {
 	private int id;
 	Set<?> symbols;
 	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public Set<?> getSymbols() {
+		return symbols;
+	}
+	
+	public void setSymbols(Set<?> symbols) {
+		this.symbols = symbols;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
