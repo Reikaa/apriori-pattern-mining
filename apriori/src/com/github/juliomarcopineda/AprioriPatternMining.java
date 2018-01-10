@@ -23,8 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.collect.Sets;
-
 /**
  * add class description
  * 
@@ -93,7 +91,6 @@ public class AprioriPatternMining<E> {
 		
 		Set<String> a = new HashSet<>();
 		
-		Sets.intersection(a, itemsets);
 		
 		return null;
 	}
